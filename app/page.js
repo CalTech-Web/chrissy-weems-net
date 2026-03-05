@@ -8,7 +8,7 @@ import CountUp from '@/components/CountUp';
 
 export default function Home() {
   return (
-    <>
+    <div style={{ paddingTop: '75px', paddingBottom: '75px' }}>
       {/* Hero — Cinematic Full-Screen */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden noise-overlay">
         {/* Animated gradient background */}
@@ -288,6 +288,6 @@ export default function Home() {
           </AnimatedSection>
         </div>
       </section>
-    </>
+    </div>
   );
 }
