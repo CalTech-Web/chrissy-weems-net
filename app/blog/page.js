@@ -1,10 +1,13 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import Hero from '@/components/Hero';
 import AnimatedSection, { AnimatedCard } from '@/components/AnimatedSection';
 import { posts } from '@/lib/posts';
+
+export const metadata = {
+  title: 'Blog',
+  description: 'Latest news, stories, and insights from Chrissy Weems and Origami Owl.',
+};
 
 export default function Blog() {
   return (
@@ -14,20 +17,21 @@ export default function Blog() {
         subtitle="Stories, insights, and updates from Chrissy Weems"
       />
 
-      <section className="relative py-24 bg-dark overflow-hidden">
+      <section className="relative py-16 sm:py-24 bg-dark overflow-hidden">
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-purple-900/15 blur-[150px]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {posts.map((post, i) => (
               <AnimatedCard key={i} delay={i * 0.15}>
                 <Link href={`/blog/${post.slug}`}>
                   <article className="glass-card rounded-2xl overflow-hidden group cursor-pointer h-full">
-                    <div className="relative h-56 overflow-hidden">
+                    <div className="relative h-48 sm:h-56 overflow-hidden">
                       <Image
                         src={post.image}
                         alt={post.title}
                         fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent" />
@@ -37,8 +41,8 @@ export default function Blog() {
                         </span>
                       </div>
                     </div>
-                    <div className="p-6">
-                      <h3 className="font-heading text-xl font-bold text-white mb-3 leading-snug group-hover:text-accent-400 transition-colors duration-300">
+                    <div className="p-5 sm:p-6">
+                      <h3 className="font-heading text-lg sm:text-xl font-bold text-white mb-3 leading-snug group-hover:text-accent-400 transition-colors duration-300">
                         {post.title}
                       </h3>
                       <p className="text-white/40 font-body text-sm leading-relaxed">

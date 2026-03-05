@@ -1,8 +1,11 @@
-'use client';
-
 import Hero from '@/components/Hero';
 import ContactForm from '@/components/ContactForm';
 import AnimatedSection, { AnimatedCard } from '@/components/AnimatedSection';
+
+export const metadata = {
+  title: 'Contact',
+  description: 'Get in touch with Chrissy Weems. Send a message or connect on social media.',
+};
 
 export default function Contact() {
   return (
@@ -12,17 +15,17 @@ export default function Contact() {
         subtitle="Have a question or want to connect? Send a message below."
       />
 
-      <section className="relative py-24 bg-dark overflow-hidden">
+      <section className="relative py-16 sm:py-24 bg-dark overflow-hidden">
         <div className="absolute top-0 left-1/2 w-[600px] h-[600px] rounded-full bg-purple-900/10 blur-[200px] -translate-x-1/2" />
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <AnimatedSection>
-            <div className="glass-card rounded-2xl p-8 md:p-12 hover:border-primary-500/20 transition-all duration-500">
+            <div className="glass-card rounded-2xl p-5 sm:p-8 md:p-12 hover:border-primary-500/20 transition-all duration-500">
               <ContactForm />
             </div>
           </AnimatedSection>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="mt-10 sm:mt-16 grid grid-cols-3 gap-3 sm:gap-4">
             {[
               {
                 href: 'https://twitter.com/chrissy_weems',
@@ -45,12 +48,12 @@ export default function Contact() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass-card rounded-xl p-6 text-center block group hover:border-accent-400/20 transition-all duration-500"
+                  className="glass-card rounded-xl p-4 sm:p-6 text-center block group hover:border-accent-400/20 transition-all duration-500"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-white/5 group-hover:bg-accent-400/10 flex items-center justify-center mx-auto mb-3 text-white/40 group-hover:text-accent-400 transition-all duration-300">
+                  <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl bg-white/5 group-hover:bg-accent-400/10 flex items-center justify-center mx-auto mb-2 sm:mb-3 text-white/40 group-hover:text-accent-400 transition-all duration-300">
                     {social.icon}
                   </div>
-                  <span className="text-sm font-body font-semibold text-white/50 group-hover:text-white transition-colors">{social.label}</span>
+                  <span className="text-xs sm:text-sm font-body font-semibold text-white/50 group-hover:text-white transition-colors hidden sm:block">{social.label}</span>
                 </a>
               </AnimatedCard>
             ))}

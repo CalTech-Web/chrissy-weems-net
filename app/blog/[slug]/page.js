@@ -26,22 +26,23 @@ export default function BlogPost({ params }) {
   return (
     <>
       {/* Hero with post image */}
-      <section className="relative min-h-[60vh] flex items-end overflow-hidden">
+      <section className="relative min-h-[50vh] md:min-h-[60vh] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={post.image}
             alt={post.title}
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/70 to-dark/30" />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-40 w-full">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 sm:pb-16 pt-28 sm:pt-40 w-full">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-accent-400 font-body text-sm font-semibold uppercase tracking-[0.2em] mb-6 hover:text-accent-300 transition-colors"
+            className="inline-flex items-center gap-2 text-accent-400 font-body text-sm font-semibold uppercase tracking-[0.2em] mb-4 sm:mb-6 hover:text-accent-300 transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -51,20 +52,20 @@ export default function BlogPost({ params }) {
           <span className="block px-3 py-1 rounded-full glass text-accent-400 text-xs font-bold uppercase tracking-wider w-fit mb-4">
             {post.date}
           </span>
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
             {post.title}
           </h1>
         </div>
       </section>
 
       {/* Post content */}
-      <section className="relative py-20 bg-dark">
+      <section className="relative py-12 sm:py-20 bg-dark overflow-hidden">
         <div className="absolute top-0 left-1/2 w-[600px] h-[400px] rounded-full bg-purple-900/10 blur-[200px] -translate-x-1/2" />
 
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="space-y-6">
             {post.content.map((paragraph, i) => (
-              <p key={i} className="text-white/60 font-body text-lg leading-relaxed">
+              <p key={i} className="text-white/60 font-body text-base sm:text-lg leading-relaxed">
                 {paragraph}
               </p>
             ))}

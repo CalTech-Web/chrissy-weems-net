@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +11,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -24,12 +23,9 @@ export default function Navbar() {
   ];
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 animate-fade-in-up ${
+        scrolled || isOpen
           ? 'glass-dark shadow-2xl shadow-purple-900/20'
           : 'bg-transparent'
       }`}
@@ -53,10 +49,7 @@ export default function Navbar() {
               >
                 {link.label}
                 {pathname === link.href && (
-                  <motion.span
-                    layoutId="activeTab"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-accent-400 to-accent-500 rounded-full"
-                  />
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-accent-400 to-accent-500 rounded-full" />
                 )}
               </Link>
             ))}
@@ -77,34 +70,29 @@ export default function Navbar() {
           </button>
         </div>
 
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="pb-4 space-y-1">
-                {links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`block py-3 px-4 rounded-lg font-body text-sm uppercase tracking-[0.2em] transition-all ${
-                      pathname === link.href
-                        ? 'text-accent-400 bg-white/5'
-                        : 'text-white/70 hover:text-white hover:bg-white/5'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="pb-4 space-y-1">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`block py-3 px-4 rounded-lg font-body text-sm uppercase tracking-[0.2em] transition-all ${
+                  pathname === link.href
+                    ? 'text-accent-400 bg-white/5'
+                    : 'text-white/70 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 }
