@@ -26,7 +26,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 animate-fade-in-up ${
         scrolled || isOpen
-          ? 'glass-dark shadow-2xl shadow-purple-900/20'
+          ? 'bg-black/30 backdrop-blur-xl shadow-2xl shadow-purple-900/20'
           : 'bg-transparent'
       }`}
     >
